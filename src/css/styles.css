@@ -121,6 +121,12 @@ main {
   line-height: 23px;
 }
 
+.container .profile-data .info .followers-following-area {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+
 /* REPOSITORIES */
 
 .container .profile-data .repositories h2{
