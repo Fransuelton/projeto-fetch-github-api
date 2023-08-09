@@ -8,11 +8,11 @@ const screen = {
                                 <p>${user.bio ?? 'Não possui bio cadastrada 😥'}</p>
                                 <div class="followers-following-area">
                                     <div class="followers">
-                                        <p>Seguidores <i class="fa-solid fa-user-group"></i></p>
+                                        <p><i class="fa-solid fa-user-group"></i> Seguidores</p>
                                         <p>${user.followers}</p>
                                     </div>
                                     <div class="following">
-                                        <p>Seguindo <i class="fa-solid fa-users"></i></p>
+                                        <p><i class="fa-solid fa-users"></i> Seguindo</p>
                                         <p>${user.following}</p>
                                     </div>
                                 </div>
@@ -20,7 +20,17 @@ const screen = {
                         </div>`
 
         let repositoriesItens = ''
-        user.repositories.forEach(repo => repositoriesItens += `<li><a href="${repo.html_url}" target="_blank">${repo.name}</a></li>`)
+        user.repositories.forEach(repo => {
+            repositoriesItens += `<li>  
+                                        <a href="${repo.html_url}" target="_blank">${repo.name}</a>
+                                        <div class="repo-stats">
+                                            <p><i class="fa-solid fa-code-fork" title="forks"></i>${repo.forks}</p>
+                                            <p><i class="fa-solid fa-star" title="stargazers"></i>${repo.stargazers_count}</p>
+                                            <p><i class="fa-solid fa-eye" title="watchers"></i>${repo.watchers_count}</p>
+                                            <p><i class="fa-solid fa-laptop-code" title="language"></i>${repo.language}</p>
+                                        </div>
+                                    </li>`
+        });
 
         if (user.repositories.length > 0) {
             this.userProfile.innerHTML += `<div class="repositories section">
@@ -31,8 +41,12 @@ const screen = {
 
         let eventsItens = ''
         user.events.forEach(event => {
-            if (event.type === "PushEvent" && "CreateEvent") {
+            if (event.type === "PushEvent") {
                 eventsItens += `<li><p>${event.repo.name}<span class="commit-message">-${event.payload.commits[0].message}</span></p></li>`
+            } else if (event.type === "CreateEvent") {
+                eventsItens += `<li><p>${event.repo.name}<span class="commit-message">-${event.payload.ref_type}</span></p></li>`
+            } else {
+
             }
         });
 
