@@ -18,16 +18,15 @@ const screen = {
                                 </div>
                             </div>
                         </div>`
-
         let repositoriesItens = ''
         user.repositories.forEach(repo => {
             repositoriesItens += `<li>  
                                         <a href="${repo.html_url}" target="_blank">${repo.name}</a>
                                         <div class="repo-stats">
-                                            <p><i class="fa-solid fa-code-fork" title="forks"></i>${repo.forks}</p>
-                                            <p><i class="fa-solid fa-star" title="stargazers"></i>${repo.stargazers_count}</p>
-                                            <p><i class="fa-solid fa-eye" title="watchers"></i>${repo.watchers_count}</p>
-                                            <p><i class="fa-solid fa-laptop-code" title="language"></i>${repo.language}</p>
+                                            <p><i class="fa-solid fa-code-fork" title="forks"></i>${repo.forks_count !== 0 ? repo.forks_count : 'Sem forks' }</p>
+                                            <p><i class="fa-solid fa-star" title="stargazers"></i>${repo.stargazers_count !== 0 ? repo.stargazers_count : 'Sem estrelas'}</p>
+                                            <p><i class="fa-solid fa-eye" title="watchers"></i>${repo.watchers_count !== 0 ? repo.watchers_count : 'Sem observadores'}</p>
+                                            <p><i class="fa-solid fa-laptop-code" title="language"></i>${repo.language ?? 'Sem linguagem'}</p>
                                         </div>
                                     </li>`
         });
